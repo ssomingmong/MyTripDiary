@@ -12,27 +12,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyTripDiary"
         tools:targetApi="31">
-
+        <activity
+            android:name=".DetailedPlan"
+            android:exported="false" />
         <activity
             android:name=".SetLocation"
             android:exported="false" />
-        <activity
-            android:name=".NewDayActivity"
-            android:exported="false" />
-        <activity
-            android:name=".PlanPerDay"
-            android:exported="false" />
-        <activity
-            android:name=".Plus2"
-            android:exported="false" />
-        <activity
-            android:name=".Plus1"
-            android:exported="false" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

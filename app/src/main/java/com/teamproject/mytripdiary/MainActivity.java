@@ -9,6 +9,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -46,14 +47,6 @@ public class MainActivity extends AppCompatActivity {
         myDatabase = new MyDatabase(this);
         myDatabase.open();
 
-        btn_home = findViewById(R.id.btn_home);
-        btn_home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showPlans();
-            }
-        });
-
         btn_plus = findViewById(R.id.btn_plus);
         btn_plus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,32 +61,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
     }
 
-    void showPlans() {
-        layoutPlans.removeAllViews();
-
-        Cursor cursorTableTrip = myDatabase.getAllDataFromTrip();
-        if (cursorTableTrip.moveToFirst()) {
-            findViewById(R.id.main_middle_messaage).setVisibility(View.INVISIBLE);
-            do {
-                // 첫 번째 테이블 데이터 처리
-                @SuppressLint("Range") int idx = cursorTableTrip.getInt(cursorTableTrip.getColumnIndex("idx"));
-                @SuppressLint("Range") String title = cursorTableTrip.getString(cursorTableTrip.getColumnIndex("title"));
-                @SuppressLint("Range") String start_date= cursorTableTrip.getString(cursorTableTrip.getColumnIndex("start_date"));
-                @SuppressLint("Range") String end_date = cursorTableTrip.getString(cursorTableTrip.getColumnIndex("end_date"));
-                Log.d("MyTripDairy", "title = "+title+" start_date = "+start_date+" end_date = "+end_date);
-
-                LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View viewPlan = inflater.inflate(R.layout.created_plan, null);
-                Button btn = viewPlan.findViewById(R.id.btnPlan);
-                btn.setText(title+"\n"+start_date+"~"+end_date);
-                layoutPlans.addView(viewPlan);
-            } while (cursorTableTrip.moveToNext());
-        } else {
-            findViewById(R.id.main_middle_messaage).setVisibility(View.VISIBLE);
-        }
-    }
     private void showCreatePlanPopup() {
         // LayoutInflater를 통해 XML 레이아웃을 객체로 변환
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -123,8 +93,11 @@ public class MainActivity extends AppCompatActivity {
         btnCreatePlan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myDatabase.insertDataToTrip(txtTitle.getText().toString(), btnSelectStartDate.getText().toString(), btnSelectEndDate.getText().toString());
-                showPlans();
+                Intent go_detailedplan = new Intent(MainActivity.this , DetailedPlan.class);
+                go_detailedplan.putExtra("title", txtTitle.getText());
+                go_detailedplan.putExtra("startdate", btnSelectStartDate.getText());
+                go_detailedplan.putExtra("enddate", btnSelectEndDate.getText());
+                startActivity(go_detailedplan);
                 popupWindow.dismiss(); // 팝업창 닫기
             }
         });
@@ -177,5 +150,25 @@ public class MainActivity extends AppCompatActivity {
                 year, month, dayOfMonth);
 
         datePickerDialog.show();
+    }
+
+    void showMap(String locationName) {
+//        String locationName = "대한민국 경기도 수원시 영통구 동탄지성로 488번길 22";
+
+        // Google Maps 앱을 열기 위한 URI 생성
+        Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + Uri.encode(locationName));
+
+        // Intent 생성 및 Google Maps 앱 열기
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+
+        // Google Maps 앱이 설치되어 있으면 열고, 그렇지 않으면 Play Store로 이동하여 설치하도록 함
+        if (mapIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(mapIntent);
+        } else {
+            // Google Maps 앱이 설치되지 않은 경우 Play Store로 이동
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.google.android.apps.maps"));
+            startActivity(intent);
+        }
     }
 }
