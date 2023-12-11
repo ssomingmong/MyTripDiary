@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/addtrip_0"
+    tools:context=".ui.addtrip.AddTripFragment">
+
+    <RelativeLayout
+        android:id="@+id/addtrip_trip_recomWrap"
+
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="@color/black">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:background="@color/black"
+            android:src="@drawable/bg_addtrip_beach"
+            android:alpha="0.8"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:id="@+id/addtrip_trip_title"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="20dp"
+            android:textColor="@color/white"
+            android:elevation="20dp"
+            android:text="즐거운 여행을 시작해보세요"
+            android:textSize="24dp"
+            android:textStyle="bold"
+
+            android:fontFamily="@font/nanumgothicbold"
+            />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/addtrip_trip_searchtitle1"
+            android:layout_below="@id/addtrip_trip_title"
+            android:background="@android:color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginHorizontal="20dp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/nanumgothicbold"
+            android:text="= 국내여행"
+
+            />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/addtrip_trip_searchtitle2"
+            android:layout_below="@id/addtrip_trip_searchtitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:background="@android:color/transparent"
+            android:textColor="@color/white"
+            android:layout_marginHorizontal="20dp"
+            android:fontFamily="@font/nanumgothicbold"
+            android:text="= 해외여행"
+
+            />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/addtrip_trip_searchtitle3"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:textSize="20dp"
+            android:textColor="@color/greenblue"
+            android:background="@drawable/background_round_white"
+            android:padding="10dp"
+            android:fontFamily="@font/nanumgothicbold"
+            android:text="여행을 떠나볼까요?"
+            android:visibility="gone"
+
+            />
+
+
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_below="@+id/addtrip_trip_recomWrap"
+        android:id="@+id/addtrip_trip_search"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginVertical="30dp"
+        android:background="@drawable/background_round_greenblue"
+        android:layout_marginHorizontal="20dp"
+        >
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_alignParentLeft="true"
+            android:id="@+id/addtrip_trip_placeIc"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_flight_24px"
+
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:layout_margin="10dp"
+            />
+
+        <EditText
+            android:id="@+id/addtrip_trip_searchText"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="3dp"
+            android:layout_marginBottom="3dp"
+            android:layout_toRightOf="@id/addtrip_trip_placeIc"
+            android:background="@android:color/transparent"
+            android:hint="여행지를 입력하세요"
+            android:fontFamily="@font/nanumgothic"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
+    </RelativeLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/addtrip_trip_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addtrip_trip_search"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:scrollbarFadeDuration="0"
+        android:scrollbarSize="5dp"
+        android:scrollbarThumbVertical="@color/greenblue"
+        android:scrollbars="vertical"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="5" />
+
+</RelativeLayout>

@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MyTripDiary</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_addTrip">AddTrip</string>
+    <string name="AIzaSyD7wAH4tEXYfTsfNnnn7EzFdjs39vE2gdQ">MAPS_API_KEY</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
